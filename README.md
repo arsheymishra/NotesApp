@@ -21,14 +21,14 @@ A full-stack Notes application with user authentication and CRUD functionality f
 - Node.js
 - Express
 - Prisma ORM
-- PostgreSQL/MySQL
+- PostgreSQL
 
 ## Setup Instructions
 
 ### Prerequisites
 - Node.js (v14+)
 - npm or yarn
-- Database (PostgreSQL/MySQL)
+- Database (PostgreSQL)
 
 ### Backend Setup
 1. Navigate to the Backend directory: `cd Backend`
@@ -37,7 +37,7 @@ A full-stack Notes application with user authentication and CRUD functionality f
    ```
    DATABASE_URL="your_database_connection_string"
    JWT_SECRET="your_jwt_secret"
-   PORT=5000
+   PORT=""
    ```
 4. Run database migrations: `npx prisma migrate dev`
 5. Start the server: `npm start`
