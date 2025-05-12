@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     { 
-      "src": "Backend/server.js",
+      "src": "Backend/api/index.js",
       "use": "@vercel/node"
     },
     {
@@ -17,7 +17,7 @@
   "routes": [
     { 
       "src": "/api/(.*)", 
-      "dest": "Backend/server.js" 
+      "dest": "Backend/api/index.js" 
     },
     { 
       "src": "/(.*\\.(js|css|ico|png|jpg|svg|json))", 

@@ -13,7 +13,7 @@ const app = express();
 // CORS Configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL || 'https://your-domain.vercel.app'] 
+    ? [process.env.FRONTEND_URL || 'https://notes-app-blush-one.vercel.app'] 
     : 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -24,7 +24,17 @@ app.use(express.json());
 
 // Health check route for Vercel
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'API is running' });
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'API is running',
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString(),
+    env_vars_set: {
+      DATABASE_URL: !!process.env.DATABASE_URL,
+      JWT_SECRET: !!process.env.JWT_SECRET,
+      FRONTEND_URL: !!process.env.FRONTEND_URL
+    }
+  });
 });
 
 app.use('/api/auth', authRoutes);
