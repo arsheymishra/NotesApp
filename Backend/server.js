@@ -12,7 +12,9 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-  origin: 'http://localhost:5173', // Frontend URL
+  origin: process.env.NODE_ENV === 'production' 
+    ? [process.env.FRONTEND_URL || 'https://your-domain.vercel.app'] 
+    : 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -20,11 +22,22 @@ app.use(cors({
 
 app.use(express.json());
 
+// Health check route for Vercel
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'API is running' });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api', profileRoutes);
-app.use('/api', notesRoutes);
+app.use('/api/notes', notesRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Only start the server if not in Vercel serverless environment
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+// Export the app for Vercel serverless functions
+export default app;

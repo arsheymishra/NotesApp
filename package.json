@@ -1,0 +1,24 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "Full-stack Notes App with authentication and CRUD functionality",
+  "main": "index.js",
+  "scripts": {
+    "install-backend": "cd Backend && npm install",
+    "install-frontend": "cd Frontend && npm install",
+    "postinstall": "npm run install-backend && npm run install-frontend",
+    "start": "cd Backend && npm start",
+    "build": "cd Frontend && npm run build"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "notes",
+    "react",
+    "express",
+    "prisma"
+  ],
+  "author": "",
+  "license": "MIT"
+} 

@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+// Determine the base URL based on environment
+const baseURL = import.meta.env.MODE === 'production'
+  ? '/api' // In production, use relative path which will be handled by Vercel routing
+  : 'http://localhost:5000/api'; // In development, use the local backend URL
+
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
