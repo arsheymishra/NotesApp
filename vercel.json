@@ -1,8 +1,13 @@
 {
   "version": 2,
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "@vercel/node@2.15.10"
+    }
+  },
   "builds": [
     { 
-      "src": "Backend/api/index.js",
+      "src": "Backend/api/**/*.js",
       "use": "@vercel/node"
     },
     {
@@ -17,15 +22,19 @@
   "routes": [
     { 
       "src": "/api/(.*)", 
-      "dest": "Backend/api/index.js" 
+      "dest": "/Backend/api/index.js" 
+    },
+    { 
+      "src": "/api/health", 
+      "dest": "/Backend/api/health.js" 
     },
     { 
       "src": "/(.*\\.(js|css|ico|png|jpg|svg|json))", 
-      "dest": "Frontend/dist/$1" 
+      "dest": "/Frontend/dist/$1" 
     },
     { 
       "src": "/(.*)", 
-      "dest": "Frontend/dist/index.html" 
+      "dest": "/Frontend/dist/index.html" 
     }
   ]
 } 
